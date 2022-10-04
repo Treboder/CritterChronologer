@@ -46,13 +46,13 @@ public class Pet {
         this.name = name;
     }
 
-//    public Customer getOwner() {
-//        return owner;
-//    }
-//
-//    public void setOwner(Customer owner) {
-//        this.owner = owner;
-//    }
+    public Customer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Customer owner) {
+        this.owner = owner;
+    }
 
     public LocalDate getBirthDate() {
         return birthDate;

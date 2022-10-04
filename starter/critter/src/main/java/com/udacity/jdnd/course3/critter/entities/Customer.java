@@ -17,6 +17,13 @@ public class Customer {
     @OneToMany(targetEntity = Pet.class, mappedBy = "owner", cascade = CascadeType.ALL) // @OneToMany has FetchType.LAZY as default
     private List<Pet> pets;
 
+    public Customer(Long id, String name, String phoneNumber, String notes) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+    }
+
     public Customer() {
     }
 
@@ -52,11 +59,11 @@ public class Customer {
         this.notes = notes;
     }
 
-//    public List<Pet> getPets() {
-//        return pets;
-//    }
-//
-//    public void setPets(List<Pet> pets) {
-//        this.pets = pets;
-//    }
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
 }
