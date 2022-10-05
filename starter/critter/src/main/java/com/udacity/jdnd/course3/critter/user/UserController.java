@@ -37,7 +37,8 @@ public class UserController {
         Customer customer = new Customer(customerDTO.getId(), customerDTO.getName(), customerDTO.getPhoneNumber(), customerDTO.getNotes());
         CustomerDTO convertedCustomer;
         try {
-            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomerWithoutPets(customer));
+            //convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomerWithoutPets(customer));
+            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomer(customer, customerDTO.getPetIds()));
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer could not be saved", exception);
         }
@@ -46,12 +47,31 @@ public class UserController {
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
-        throw new UnsupportedOperationException();
+        List<Customer> customers = customerService.getAllCustomers();
+        return customers.stream().map(this::convertCustomerToCustomerDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/customer/{id}")
+    public CustomerDTO getCustomerById(@PathVariable long id) {
+        Customer customer;
+        try {
+            customer = customerService.getCustomerById(id);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "owner with id: " + id + " not found", exception);
+        }
+        return convertCustomerToCustomerDTO(customer);
     }
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
         throw new UnsupportedOperationException();
+//        Customer customer;
+//        try {
+//            customer = customerService.getCustomerByPetId(petId);
+//        } catch (Exception exception) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", exception);
+//        }
+//        return convertCustomerToCustomerDTO(customer);
     }
 
     @PostMapping("/employee")

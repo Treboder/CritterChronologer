@@ -32,14 +32,29 @@ public class CustomerService {
 //        customer.setPets(customerPets);
 //        return customerRepository.save(customer);
 //    }
-//
-//    public Customer getCustomerByPetId(Long petId) {
-//        Customer customer = petRepository.getOne(petId).getOwner();
-//        return customer;
-//    }
-//
-//    public List<Customer> getAllCustomers() {
-//        List<Customer> customers = customerRepository.findAll();
-//        return customers;
-//    }
+
+        public Customer saveCustomer(Customer customer, List<Long> petIds) {
+        List<Pet> customerPets = new ArrayList<>();
+        if (petIds != null && !petIds.isEmpty()) {
+            customerPets = petIds.stream().map((petId) -> petRepository.getOne(petId)).collect(Collectors.toList()); // ToDo: Replace deprecated method
+        }
+        customer.setPets(customerPets);
+        return customerRepository.save(customer);
+    }
+
+    public Customer getCustomerById(Long id) {
+        Customer customer = customerRepository.getOne(id);
+        return customer;
+    }
+
+    public Customer getCustomerByPetId(Long petId) {
+        Pet pet = petRepository.getOne(petId);
+        Customer customer = petRepository.getOne(petId).getOwner();
+        return customer;
+    }
+
+    public List<Customer> getAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return customers;
+    }
 }

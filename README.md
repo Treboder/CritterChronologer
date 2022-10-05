@@ -20,8 +20,21 @@ Service responds with a customer entity/object having a unique id (and some empt
 }
 ```
 
-### Save Employee Service
-Create a new empployee with a POST-Request to [http://localhost:8082/user/employee](http://localhost:8082/user/employee) containing payload/body below.
+### Save pet service
+Create a new pet with a POST-Request to [http://localhost:8082/pet](http://localhost:8082/pet) containing payload/body below.
+Service responds with a pet entity/object.
+```
+{
+  "type": "CAT",
+  "name": "Kilo",
+  "birthDate": "2019-12-16T04:43:57.995Z",
+  "notes": "HI KILO"
+, "ownerId": "1"
+}
+``` 
+
+### Save employee service
+Create a new employee with a POST-Request to [http://localhost:8082/user/employee](http://localhost:8082/user/employee) containing payload/body below.
 Service responds with a employee entity/object having a unique id (and some empty fields).
 ```
 {
@@ -29,6 +42,25 @@ Service responds with a employee entity/object having a unique id (and some empt
   "skills": ["PETTING", "FEEDING"]
 }
 ``` 
+
+### Get all customers
+Show list of existing customers with GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
+
+### get all employees 
+todo
+
+### Get all pets
+Show list of existing pets with GET-Gequest to [http://localhost:8082/pet](http://localhost:8082/pet)
+
+### Get customer by id
+A parameterized GET-Request to [http://localhost:8082/user/customer/1](http://localhost:8082/user/customer/1) will respond with the customer having id=1 
+
+### Get employee by id
+todo
+
+### Get pet by id
+A parameterized GET-Request to [http://localhost:8082/pet/1](http://localhost:8082/pet/1) will respond with the pet having id=1
+
 
 ## ToDo
 

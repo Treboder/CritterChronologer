@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Handles web requests related to Pets.
@@ -26,21 +27,29 @@ public class PetController {
         Pet pet = new Pet(petDTO.getType(), petDTO.getName(), petDTO.getBirthDate(), petDTO.getNotes());
         PetDTO convertedPet;
         try {
-            convertedPet = convertPetToPetDTO(petService.savePet(pet, petDTO.getOwnerId()));
+            Pet managedPet = petService.savePet(pet, petDTO.getOwnerId());
+            convertedPet = convertPetToPetDTO(managedPet);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet could not be saved", exception);
         }
         return convertedPet;
     }
 
-    @GetMapping("/{petId}")
-    public PetDTO getPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
-    }
-
     @GetMapping
     public List<PetDTO> getPets(){
-        throw new UnsupportedOperationException();
+        List<Pet> pets = petService.getAllPets();
+        return pets.stream().map(this::convertPetToPetDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/{petId}")
+    public PetDTO getPet(@PathVariable long petId) {
+        Pet pet;
+        try {
+            pet = petService.getPetById(petId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet with id: " + petId + " not found", exception);
+        }
+        return convertPetToPetDTO(pet);
     }
 
     @GetMapping("/owner/{ownerId}")
@@ -49,7 +58,8 @@ public class PetController {
     }
 
     private PetDTO convertPetToPetDTO(Pet pet) {
-        return new PetDTO(pet.getId(), pet.getType(), pet.getName(), pet.getOwner().getId(), pet.getBirthDate(), pet.getNotes());
+        PetDTO dto = new PetDTO(pet.getId(), pet.getType(), pet.getName(), pet.getOwner().getId(), pet.getBirthDate(), pet.getNotes());
+        return dto;
     }
 
 }

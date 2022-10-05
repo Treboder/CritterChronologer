@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class PetService {
-
     @Autowired
     CustomerRepository customerRepository;
-
     @Autowired
     PetRepository petRepository;
 
@@ -39,15 +38,15 @@ public class PetService {
 //        List<Pet> pets = petRepository.findPetByCustomerId(customerId);
 //        return pets;
 //    }
-//
-//    public List<Pet> getAllPets() {
-//        List<Pet> pets = petRepository.findAll();
-//        return pets;
-//    }
-//
-//    public Pet getPetById(Long petId) {
-//        Pet pet = petRepository.getOne(petId);
-//        return pet;
-//    }
+
+    public List<Pet> getAllPets() {
+        List<Pet> pets = petRepository.findAll();
+        return pets;
+    }
+
+    public Pet getPetById(Long petId) {
+        Pet pet = petRepository.getOne(petId);
+        return pet;
+    }
 
 }
