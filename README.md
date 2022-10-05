@@ -1,11 +1,29 @@
-# Critter Chronologer Project Starter
+# Critter Chronologer Project 
 
-Critter Chronologer a Software as a Service application that provides a scheduling interface for a small business that takes care of animals. This Spring Boot project will allow users to create pets, owners, and employees, and then schedule events for employees to provide services for pets.
-
+This project is part of the Udacity Java Web Developer Nanoedegree, showcasing the use of Spring with some basic JPA features.
+The idea behind is to show how Java supports modelling business objects and their efficient persistence to a database, mysql in this case. 
+Critter Chronologer a Software as a Service application that provides a scheduling interface for a small business that takes care of animals. 
+This Spring Boot project will allow users to create pets, owners, and employees, and then schedule events for employees to provide services for pets.
 
 ## Getting Started
 
-### Dependencies
+* [http://localhost:8082/test](http://localhost:8082/test) should return "Critter Starter installed successfully"
+* [Postman Query Collection](starter/critter/src/main/resources/udacity.postman_collection.json) contains a number of queries that you should be able to run (after importing the query collection into your postman)
+
+### Save Customer Service
+Create a new customer with a POST-Request to [http://localhost:8082/user/customer](http://localhost:8082/user/customer) containing payload/body below.
+Service responds with a customer object having a unique id (and some empty fields).
+```
+{
+"name": "Alex",
+"phoneNumber": "1234567890"
+}
+```
+ 
+
+## ToDo
+
+## Dependencies
 
 * [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download) (or Ultimate) recommended 
 * [Java SE Development Kit 8+](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
@@ -23,7 +41,7 @@ After installing the Server, you will need to create a user that your applicatio
 
 Another SQL database may be used if desired, but do not use the H2 in-memory database as your primary datasource.
 
-### Installation
+## Installation
 
 1. Clone or download this repository.
 2. Open IntelliJ IDEA.
