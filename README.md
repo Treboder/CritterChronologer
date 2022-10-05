@@ -12,14 +12,23 @@ This Spring Boot project will allow users to create pets, owners, and employees,
 
 ### Save Customer Service
 Create a new customer with a POST-Request to [http://localhost:8082/user/customer](http://localhost:8082/user/customer) containing payload/body below.
-Service responds with a customer object having a unique id (and some empty fields).
+Service responds with a customer entity/object having a unique id (and some empty fields).
 ```
 {
 "name": "Alex",
 "phoneNumber": "1234567890"
 }
 ```
- 
+
+### Save Employee Service
+Create a new empployee with a POST-Request to [http://localhost:8082/user/employee](http://localhost:8082/user/employee) containing payload/body below.
+Service responds with a employee entity/object having a unique id (and some empty fields).
+```
+{
+  "name": "Hannah",
+  "skills": ["PETTING", "FEEDING"]
+}
+``` 
 
 ## ToDo
 

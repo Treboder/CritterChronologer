@@ -1,7 +1,10 @@
 package com.udacity.jdnd.course3.critter.user;
 
 import com.udacity.jdnd.course3.critter.entities.Customer;
+import com.udacity.jdnd.course3.critter.entities.Employee;
+import com.udacity.jdnd.course3.critter.entities.Pet;
 import com.udacity.jdnd.course3.critter.services.CustomerService;
+import com.udacity.jdnd.course3.critter.services.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Handles web requests related to Users.
@@ -25,16 +29,15 @@ public class UserController {
     @Autowired
     CustomerService customerService;
 
-    //@Autowired
-    //EmployeeService employeeService;
+    @Autowired
+    EmployeeService employeeService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
         Customer customer = new Customer(customerDTO.getId(), customerDTO.getName(), customerDTO.getPhoneNumber(), customerDTO.getNotes());
-        List<Long> petIds = customerDTO.getPetIds();
         CustomerDTO convertedCustomer;
         try {
-            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomer(customer, petIds));
+            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomerWithoutPets(customer));
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer could not be saved", exception);
         }
@@ -53,7 +56,15 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Employee employee = new Employee(employeeDTO.getId(), employeeDTO.getName(), employeeDTO.getSkills(), employeeDTO.getDaysAvailable());
+        EmployeeDTO convertedEmployee;
+        try {
+            Employee managedEmployee = employeeService.saveEmployee(employee);
+            convertedEmployee = convertEmployeeToEmployeeDTO(managedEmployee);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee could not be saved", exception);
+        }
+        return convertedEmployee;
     }
 
     @PostMapping("/employee/{employeeId}")
@@ -72,9 +83,16 @@ public class UserController {
     }
 
     private CustomerDTO convertCustomerToCustomerDTO(Customer customer){
-        CustomerDTO customerDTO = new CustomerDTO();
-        BeanUtils.copyProperties(customer, customerDTO);
+        List<Long> petIds = customer.getPets().stream().map(Pet::getId).collect(Collectors.toList());
+        CustomerDTO customerDTO = new CustomerDTO(customer.getId(), customer.getName(), customer.getPhoneNumber(), customer.getNotes(), petIds);
+        // BeanUtils.copyProperties(customer, customerDTO); will not transfer the pet objects to their corresponding pet id list
         return customerDTO;
+    }
+
+    private EmployeeDTO convertEmployeeToEmployeeDTO(Employee employee) {
+        EmployeeDTO dto = new EmployeeDTO(employee.getId(), employee.getName(), employee.getSkills(), employee.getDaysAvailable());
+        // BeanUtils.copyProperties does not transfer the skills properly
+        return dto;
     }
 
     private Customer convertCustomerDTOToCustomer(CustomerDTO dto) {
@@ -82,5 +100,13 @@ public class UserController {
         BeanUtils.copyProperties(dto, customer);
         return customer;
     }
+
+    private Employee convertEmployeeDTOToEmployee(EmployeeDTO dto) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(dto, employee);
+        return employee;
+    }
+
+
 
 }

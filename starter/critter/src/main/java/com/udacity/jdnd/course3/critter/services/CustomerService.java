@@ -20,22 +20,26 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public Customer saveCustomer(Customer customer, List<Long> petIds) {
-        List<Pet> customerPets = new ArrayList<>();
-        if (petIds != null && !petIds.isEmpty()) {
-            customerPets = petIds.stream().map((petId) -> petRepository.getOne(petId)).collect(Collectors.toList());
-        }
-        customer.setPets(customerPets);
+    public Customer saveCustomerWithoutPets(Customer customer) {
         return customerRepository.save(customer);
     }
 
-    public Customer getCustomerByPetId(Long petId) {
-        Customer customer = petRepository.getOne(petId).getOwner();
-        return customer;
-    }
-
-    public List<Customer> getAllCustomers() {
-        List<Customer> customers = customerRepository.findAll();
-        return customers;
-    }
+//    public Customer saveCustomerWithPets(Customer customer, List<Long> petIds) {
+//        List<Pet> customerPets = new ArrayList<>();
+//        if (petIds != null && !petIds.isEmpty()) {
+//            customerPets = petIds.stream().map((petId) -> petRepository.getOne(petId)).collect(Collectors.toList()); // ToDo: Replace deprecated method
+//        }
+//        customer.setPets(customerPets);
+//        return customerRepository.save(customer);
+//    }
+//
+//    public Customer getCustomerByPetId(Long petId) {
+//        Customer customer = petRepository.getOne(petId).getOwner();
+//        return customer;
+//    }
+//
+//    public List<Customer> getAllCustomers() {
+//        List<Customer> customers = customerRepository.findAll();
+//        return customers;
+//    }
 }

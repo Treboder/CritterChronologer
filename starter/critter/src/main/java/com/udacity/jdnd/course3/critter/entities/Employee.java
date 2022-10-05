@@ -22,6 +22,13 @@ public class Employee {
     @ElementCollection
     private Set<DayOfWeek> daysAvailable;
 
+    public Employee(long id, String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+        this.id = id;
+        this.name = name;
+        this.skills = skills;
+        this.daysAvailable = daysAvailable;
+    }
+
     public Employee() {
 
     }
@@ -42,19 +49,19 @@ public class Employee {
         this.name = name;
     }
 
-//    public Set<EmployeeSkill> getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(Set<EmployeeSkill> skills) {
-//        this.skills = skills;
-//    }
-//
-//    public Set<DayOfWeek> getDaysAvailable() {
-//        return daysAvailable;
-//    }
-//
-//    public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
-//        this.daysAvailable = daysAvailable;
-//    }
+    public Set<EmployeeSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<EmployeeSkill> skills) {
+        this.skills = skills;
+    }
+
+    public Set<DayOfWeek> getDaysAvailable() {
+        return daysAvailable;
+    }
+
+    public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
+        this.daysAvailable = daysAvailable;
+    }
 }
