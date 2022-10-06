@@ -59,20 +59,20 @@ shows the list of existing employees.
 responds with the customer having id=1. 
 
 * A parameterized GET-Request to [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
-responds with the employee identified by id=3.
+responds with the employee identified by id=3 (parameterized as PathVariable).
 
 * A parameterized GET-Request to [http://localhost:8082/pet/1](http://localhost:8082/pet/1) 
-responds with the pet having id=1.
+responds with the pet having id=1 (parameterized as PathVariable).
 
 ### Get owner by pet / get pets by owner 
 * A parameterized GET-Request to [http://localhost:8082/user/customer/pet/2](http://localhost:8082/user/customer/pet/2) 
-responds with the owner of pet with id=2.
+responds with the owner of pet with id=2 (parameterized as PathVariable).
  
 * A parameterized GET-Request to [http://localhost:8082/pet/owner/1](http://localhost:8082/pet/owner/1)
-responds with a list of pets owned by customer with id=1.
+responds with a list of pets owned by customer with id=1 (parameterized as PathVariable).
 
 ### Add employee schedule / check employee availability for a given date
-* Add a schedule to an existing employee (with id=1) using a parameterized PUT-Request to
+* Add a schedule to an existing employee (with id=1 as PathVariable) using a parameterized PUT-Request to
  [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
  containing payload/body below.
  Service responds with void, respectively no response in case of success. 
@@ -82,8 +82,8 @@ responds with a list of pets owned by customer with id=1.
 }
 ``` 
 
-* You can check the availability for certain services on a certain date with a parameterized GET-Request to
- http://localhost:8082/user/employee/availability
+* You can check the availability for certain services (like feeding or petting) on a certain date with a GET-Request to
+ [http://localhost:8082/user/employee/availability](http://localhost:8082/user/employee/availability) 
  containing the payload/body below.
  Service responds with the employee object/entity that provides the specified services on the given date. 
 ```
