@@ -71,6 +71,28 @@ responds with the owner of pet with id=2.
 * A parameterized GET-Request to [http://localhost:8082/pet/owner/1](http://localhost:8082/pet/owner/1)
 responds with a list of pets owned by customer with id=1.
 
+### Add employee schedule / check employee availability for a given date
+* Add a schedule to an existing employee (with id=1) using a parameterized PUT-Request to
+ [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
+ containing payload/body below.
+ Service responds with void, respectively no response in case of success. 
+```
+{
+    ["MONDAY", "TUESDAY", "FRIDAY"]
+}
+``` 
+
+* You can check the availability for certain services on a certain date with a parameterized GET-Request to
+ http://localhost:8082/user/employee/availability
+ containing the payload/body below.
+ Service responds with the employee object/entity that provides the specified services on the given date. 
+```
+{
+"date": "2019-12-17",
+"skills": ["PETTING", "FEEDING"]
+}
+```
+
 ## ToDo
 
 ## Dependencies

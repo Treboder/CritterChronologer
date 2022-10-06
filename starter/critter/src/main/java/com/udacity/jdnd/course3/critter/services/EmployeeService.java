@@ -4,13 +4,18 @@ import com.udacity.jdnd.course3.critter.entities.Customer;
 import com.udacity.jdnd.course3.critter.entities.Employee;
 import com.udacity.jdnd.course3.critter.repositories.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.user.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,5 +39,21 @@ public class EmployeeService {
         else
             return null; // ToDo: throw exception here?
     }
+
+    public void setEmployeeAvailability(Set<DayOfWeek> days, Long employeeId) {
+        Employee employee = employeeRepository.getOne(employeeId);
+        employee.setDaysAvailable(days);
+        employeeRepository.save(employee);
+    }
+
+    public List<Employee> getEmployeesByService(LocalDate date, Set<EmployeeSkill> skills){
+        List<Employee> employees = employeeRepository
+                .findByDaysAvailable(date.getDayOfWeek()).stream()
+                .filter(employee -> employee.getSkills().containsAll(skills))
+                .collect(Collectors.toList());
+        return employees;
+    }
+
+
 
 }
