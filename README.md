@@ -15,8 +15,8 @@ Create a new customer with a POST-Request to [http://localhost:8082/user/custome
 Service responds with the persisted customer entity/object having a unique id (and some empty fields).
 ```
 {
-"name": "Alex",
-"phoneNumber": "1234567890"
+   "name": "Alex",
+   "phoneNumber": "1234567890"
 }
 ```
 
@@ -89,8 +89,8 @@ responds with a list of pets owned by customer with id=1 (parameterized as PathV
  Service responds with the employee object/entity that provides the specified services on the given date. 
 ```
 {
-"date": "2019-12-17",
-"skills": ["PETTING", "FEEDING"]
+    "date": "2019-12-17",
+    "skills": ["PETTING", "FEEDING"]
 }
 ```
 
