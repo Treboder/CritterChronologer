@@ -36,7 +36,7 @@ public class ScheduleService {
         schedule.setPets(pets);
         schedule.setEmployee(employees);
         return scheduleRepository.save(schedule);
-        // ToDo: Check for availablity first?
+        // ToDo: Check for availability first?
     }
 
     public List<Schedule> getAllSchedules() {

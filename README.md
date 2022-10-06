@@ -1,6 +1,6 @@
 # Critter Chronologer Project 
 
-This project is part of the Udacity Java Web Developer Nanoedegree, showcasing the use of Spring with some basic JPA features.
+This project is part of the Udacity Java Web Developer Nanodegree, showcasing the use of Spring with some basic JPA features.
 The idea behind is to show how Java supports modelling business objects and their efficient persistence to a database, mysql in this case. 
 Critter Chronologer a Software as a Service application that provides a scheduling interface for a small business that takes care of animals. 
 This Spring Boot project will allow users to create pets, owners, and employees, and then schedule events for employees to provide services for pets.
@@ -8,11 +8,11 @@ This Spring Boot project will allow users to create pets, owners, and employees,
 ## Getting Started
 
 * [http://localhost:8082/test](http://localhost:8082/test) should return "Critter Starter installed successfully"
-* [Postman Query Collection](starter/critter/src/main/resources/udacity.postman_collection.json) contains a number of queries that you should be able to run (after importing the query collection into your postman)
+* [Postman Query Collection](`src/main/resource/Udacity.postman_collection.json`) contains a number of queries that you should be able to run (after importing the query collection into your postman)
 
 ### Save Customer Service
 Create a new customer with a POST-Request to [http://localhost:8082/user/customer](http://localhost:8082/user/customer) containing payload/body below.
-Service responds with a customer entity/object having a unique id (and some empty fields).
+Service responds with the persisted customer entity/object having a unique id (and some empty fields).
 ```
 {
 "name": "Alex",
@@ -22,7 +22,7 @@ Service responds with a customer entity/object having a unique id (and some empt
 
 ### Save pet service
 Create a new pet with a POST-Request to [http://localhost:8082/pet](http://localhost:8082/pet) containing payload/body below.
-Service responds with a pet entity/object.
+Service responds with the persisted pet entity/object having a unique id.
 ```
 {
   "type": "CAT",
@@ -36,7 +36,7 @@ Service responds with a pet entity/object.
 ### Save employee service
 Create a new employee with a POST-Request to [http://localhost:8082/user/employee](http://localhost:8082/user/employee) 
 containing payload/body below.
-Service responds with a employee entity/object having a unique id (and some empty fields).
+Service responds with the persisted employee entity/object having a unique id (and some empty fields).
 ```
 {
   "name": "Hannah",
@@ -44,34 +44,35 @@ Service responds with a employee entity/object having a unique id (and some empt
 }
 ``` 
 
-### Get all customers/employees/pets
-* GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
+### Get all customers/pets/employees
+* GET-Request to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
 shows the list of existing customers.
  
-* GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
-shows the list of existing customers.
+* GET-Request to [http://localhost:8082/pet/](http://localhost:8082/pet/)
+shows the list of existing pets.
 
-* GET-Gequest to [http://localhost:8082/user/employee](http://localhost:8082/user/employee)
+* GET-Request to [http://localhost:8082/user/employee](http://localhost:8082/user/employee)
 shows the list of existing employees.
 
-### Get customer/employee/pet by id
+### Get customer/pet/employee by id
 * A parameterized GET-Request to [http://localhost:8082/user/customer/1](http://localhost:8082/user/customer/1) 
 responds with the customer having id=1. 
+
+* A parameterized GET-Request to [http://localhost:8082/pet/2](http://localhost:8082/pet/2)
+  responds with the pet having id=2 (parameterized as PathVariable).
 
 * A parameterized GET-Request to [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
 responds with the employee identified by id=3 (parameterized as PathVariable).
 
-* A parameterized GET-Request to [http://localhost:8082/pet/1](http://localhost:8082/pet/1) 
-responds with the pet having id=1 (parameterized as PathVariable).
 
-### Get owner by pet / get pets by owner 
+### Get customer by pet and get pets by customer 
 * A parameterized GET-Request to [http://localhost:8082/user/customer/pet/2](http://localhost:8082/user/customer/pet/2) 
-responds with the owner of pet with id=2 (parameterized as PathVariable).
+responds with the customer of pet with id=2 (parameterized as PathVariable).
  
 * A parameterized GET-Request to [http://localhost:8082/pet/owner/1](http://localhost:8082/pet/owner/1)
 responds with a list of pets owned by customer with id=1 (parameterized as PathVariable).
 
-### Add employee schedule / check employee availability for a given date
+### Add employee schedule and check employee availability for a given date
 * Add a schedule to an existing employee (with id=1 as PathVariable) using a parameterized PUT-Request to
  [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
  containing payload/body below.
@@ -92,6 +93,34 @@ responds with a list of pets owned by customer with id=1 (parameterized as PathV
 "skills": ["PETTING", "FEEDING"]
 }
 ```
+
+### Create schedule and get schedules (all or by customer/pet/employee)
+* Create a schedule (i.e. a meeting between a number of employees and pets for a set of activities) 
+  by using a POST-Request to [http://localhost:8082/schedule](http://localhost:8082/schedule) 
+  containing the payload below.
+  Service responds with the persisted schedule entity/object having a unique id.
+```
+{
+    "employeeIds": [3],
+    "petIds": [2],
+    "date": "2020-08-02",
+    "activities": ["FEEDING", "PETTING"]
+}
+```
+
+* Get list of all existing schedules via GET-Request to [http://localhost:8082/schedule](http://localhost:8082/schedule)
+
+* Find schedule by customer with a certain id via parameterized GET-Request 
+  [http://localhost:8082/schedule/customer/1](http://localhost:8082/schedule/customer/1)
+  where pathvariable represents the id (in this case for the customer with id=1)
+
+* Find schedule by pet via with a certain id via parameterized GET-Request
+  [http://localhost:8082/schedule/pet/2](http://localhost:8082/schedule/pet/2)
+  where pathvariable represents the id (in this case for the pet with id=2)
+
+* Find schedule by employee via with a certain id via parameterized GET-Request
+  [http://localhost:8082/schedule/employee/3](http://localhost:8082/schedule/employee/3)
+  where pathvariable represents the id (in this case for the employee with id=3)
 
 ## ToDo
 
@@ -131,7 +160,7 @@ Once you have completed the above installation, you should also be able to run t
 1. Within your project in IDEA, Navigate to `src/test/java/com.udacity.jdnd.course3.critter`.
 2. Within that directory, click on `CritterFunctionalTest.java` and select `Run` -> `Run CritterFunctionalTest`.
 
-A window should open showing you the test executions. All 9 tests should fail and if you click on them they will show `java.lang.UnsupportedOperationeException` as the cause.
+A window should open showing you the test executions. All 9 tests should fail and if you click on them, they will show `java.lang.UnsupportedOperationeException` as the cause.
 
 As you complete the objectives of this project, you will be able to verify progress by re-running these tests.
 
@@ -143,7 +172,7 @@ Tests will pass under the following conditions:
 * `testAddPetsToCustomer` - **PetController.getPetsByOwner** returns a saved pet with the same id and name as the one saved with **UserController.savePet** for a given owner
 * `testFindPetsByOwner` - **PetController.getPetsByOwner** returns all pets saved for that owner.
 * `testFindOwnerByPet` - **UserController.getOwnerByPet** returns the saved owner used to create the pet.
-* `testChangeEmployeeAvailability` - **UserController.getEmployee** returns an employee with the same availability as set for that employee by **UserControler.setAvailability**
+* `testChangeEmployeeAvailability` - **UserController.getEmployee** returns an employee with the same availability as set for that employee by **UserController.setAvailability**
 * `testFindEmployeesByServiceAndTime` - **UserController.findEmployeesForService** returns all saved employees that have the requested availability and skills and none that do not
 * `testSchedulePetsForServiceWithEmployee` - **ScheduleController.createSchedule** returns a saved schedule matching the requested activities, pets, employees, and date
 * `testFindScheduleByEntities` - **ScheduleController.getScheduleForEmployee** returns all saved schedules containing that employee. **ScheduleController.getScheduleForPet** returns all saved schedules for that pet. **ScheduleController.getScheduleForCustomer** returns all saved schedules for any pets belonging to that owner.
