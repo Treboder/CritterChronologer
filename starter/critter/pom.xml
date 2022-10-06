@@ -5,8 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.4</version>
-		<!-- 2.2.2.RELEASE  ToDo: check if we should return to original starter version -->
+		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.udacity.jdnd.course3</groupId>
@@ -55,7 +54,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<!-- <scope>test</scope> Todo: confine h2 to test -->
 		</dependency>
 	</dependencies>
 

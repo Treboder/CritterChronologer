@@ -22,7 +22,7 @@ public class PetService {
 
     public Pet savePet(Pet pet, Long customerId) {
         // update the pet with its customer/owner fetched by id
-        Customer customer = customerRepository.getOne(customerId); // ToDo: replace deprecated method
+        Customer customer = customerRepository.getOne(customerId);
         pet.setOwner(customer);
         pet = petRepository.save(pet);
         // update the owners/customers pet list

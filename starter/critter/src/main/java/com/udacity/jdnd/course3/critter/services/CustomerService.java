@@ -29,7 +29,7 @@ public class CustomerService {
     public Customer saveCustomerWithPets(Customer customer, List<Long> petIds) {
         List<Pet> customerPets = new ArrayList<>();
         if (petIds != null && !petIds.isEmpty()) {
-            customerPets = petIds.stream().map((petId) -> petRepository.getOne(petId)).collect(Collectors.toList()); // ToDo: Replace deprecated method
+            customerPets = petIds.stream().map((petId) -> petRepository.getOne(petId)).collect(Collectors.toList());
         }
         customer.setPets(customerPets);
         return customerRepository.save(customer);
