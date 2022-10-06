@@ -44,36 +44,31 @@ Service responds with a employee entity/object having a unique id (and some empt
 }
 ``` 
 
-### Get all customers
-GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
+### Get all customers/employees/pets
+* GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
+shows the list of existing customers.
+ 
+* GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
 shows the list of existing customers.
 
-### get all employees 
-GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
-shows the list of existing customers.
-
-### Get all pets
-GET-Gequest to [http://localhost:8082/user/employee](http://localhost:8082/user/employee)
+* GET-Gequest to [http://localhost:8082/user/employee](http://localhost:8082/user/employee)
 shows the list of existing employees.
 
-### Get customer by id
-A parameterized GET-Request to [http://localhost:8082/user/customer/1](http://localhost:8082/user/customer/1) 
+### Get customer/employee/pet by id
+* A parameterized GET-Request to [http://localhost:8082/user/customer/1](http://localhost:8082/user/customer/1) 
 responds with the customer having id=1. 
 
-### Get employee by id
-A parameterized GET-Request to [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
+* A parameterized GET-Request to [http://localhost:8082/user/employee/3](http://localhost:8082/user/employee/3)
 responds with the employee identified by id=3.
 
-### Get pet by id
-A parameterized GET-Request to [http://localhost:8082/pet/1](http://localhost:8082/pet/1) 
+* A parameterized GET-Request to [http://localhost:8082/pet/1](http://localhost:8082/pet/1) 
 responds with the pet having id=1.
 
-### Get owner by pet
-A parameterized GET-Request to [http://localhost:8082/user/customer/pet/2](http://localhost:8082/user/customer/pet/2) 
+### Get owner by pet / get pets by owner 
+* A parameterized GET-Request to [http://localhost:8082/user/customer/pet/2](http://localhost:8082/user/customer/pet/2) 
 responds with the owner of pet with id=2.
-
-### Get pets by owner
-A parameterized GET-Request to [http://localhost:8082/pet/owner/1](http://localhost:8082/pet/owner/1)
+ 
+* A parameterized GET-Request to [http://localhost:8082/pet/owner/1](http://localhost:8082/pet/owner/1)
 responds with a list of pets owned by customer with id=1.
 
 ## ToDo
