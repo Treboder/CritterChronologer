@@ -37,8 +37,7 @@ public class UserController {
         Customer customer = new Customer(customerDTO.getId(), customerDTO.getName(), customerDTO.getPhoneNumber(), customerDTO.getNotes());
         CustomerDTO convertedCustomer;
         try {
-            //convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomerWithoutPets(customer));
-            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomer(customer, customerDTO.getPetIds()));
+            convertedCustomer = convertCustomerToCustomerDTO(customerService.saveCustomerWithoutPets(customer));
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer could not be saved", exception);
         }
@@ -64,14 +63,13 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
-//        Customer customer;
-//        try {
-//            customer = customerService.getCustomerByPetId(petId);
-//        } catch (Exception exception) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", exception);
-//        }
-//        return convertCustomerToCustomerDTO(customer);
+        Customer customer;
+        try {
+            customer = customerService.getCustomerByPetId(petId);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", exception);
+        }
+        return convertCustomerToCustomerDTO(customer);
     }
 
     @PostMapping("/employee")

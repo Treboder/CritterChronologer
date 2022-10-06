@@ -16,9 +16,9 @@ import java.util.Optional;
 @Transactional
 public class PetService {
     @Autowired
-    CustomerRepository customerRepository;
-    @Autowired
     PetRepository petRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
     public Pet savePet(Pet pet, Long customerId) {
         // update the pet with its customer/owner fetched by id
@@ -34,11 +34,6 @@ public class PetService {
         return pet;
     }
 
-//    public List<Pet> getPetsByCustomerId(long customerId) {
-//        List<Pet> pets = petRepository.findPetByCustomerId(customerId);
-//        return pets;
-//    }
-
     public List<Pet> getAllPets() {
         List<Pet> pets = petRepository.findAll();
         return pets;
@@ -48,5 +43,16 @@ public class PetService {
         Pet pet = petRepository.getOne(petId);
         return pet;
     }
+
+    public List<Pet> getPetsByCustomerId(long customerId) {
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        if(customer.isPresent())
+            return customer.get().getPets();
+        else
+            return null; // ToDo: throw exception here?
+
+    }
+
+
 
 }
