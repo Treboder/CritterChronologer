@@ -46,14 +46,15 @@ Service responds with a employee entity/object having a unique id (and some empt
 
 ### Get all customers
 GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
-shows list of existing customers.
+shows the list of existing customers.
 
 ### get all employees 
-todo
+GET-Gequest to [http://localhost:8082/user/customer](http://localhost:8082/user/customer)
+shows the list of existing customers.
 
 ### Get all pets
-GET-Gequest to [http://localhost:8082/pet](http://localhost:8082/pet)
-shows a list of existing pets.
+GET-Gequest to [http://localhost:8082/user/employee](http://localhost:8082/user/employee)
+shows the list of existing employees.
 
 ### Get customer by id
 A parameterized GET-Request to [http://localhost:8082/user/customer/1](http://localhost:8082/user/customer/1) 

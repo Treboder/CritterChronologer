@@ -86,8 +86,14 @@ public class UserController {
         return convertedEmployee;
     }
 
+    @GetMapping("/employee")
+    public List<EmployeeDTO> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        return employees.stream().map(this::convertEmployeeToEmployeeDTO).collect(Collectors.toList());
+    }
+
     @GetMapping("/employee/{employeeId}")
-    public EmployeeDTO getEmployee(@PathVariable long employeeId) {
+    public EmployeeDTO getEmployeeById(@PathVariable long employeeId) {
         Employee employee;
         try {
             employee = employeeService.getEmployeeById(employeeId);
