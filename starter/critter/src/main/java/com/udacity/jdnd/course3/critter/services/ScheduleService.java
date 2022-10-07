@@ -33,10 +33,14 @@ public class ScheduleService {
     public Schedule saveSchedule(Schedule schedule, List<Long> employeeIds, List<Long> petIds) {
         List<Pet> pets = petRepository.findAllById(petIds);
         List<Employee> employees = employeeRepository.findAllById(employeeIds);
-        schedule.setPets(pets);
-        schedule.setEmployee(employees);
-        return scheduleRepository.save(schedule);
-        // ToDo: Check for availability first?
+        if(pets.isEmpty() || employees.isEmpty())
+            return null; // exception will be thrown by controller
+        else
+        {
+            schedule.setPets(pets);
+            schedule.setEmployee(employees);
+            return scheduleRepository.save(schedule);
+        }
     }
 
     public List<Schedule> getAllSchedules() {

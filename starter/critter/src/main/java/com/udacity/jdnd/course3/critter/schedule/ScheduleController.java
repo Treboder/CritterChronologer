@@ -27,7 +27,9 @@ public class ScheduleController {
         Schedule schedule = new Schedule(scheduleDTO.getDate(), scheduleDTO.getActivities());;
         ScheduleDTO convertedSchedule;
         try {
-            convertedSchedule = convertScheduleToScheduleDTO(scheduleService.saveSchedule(schedule, scheduleDTO.getEmployeeIds(), scheduleDTO.getPetIds()));
+            schedule = scheduleService.saveSchedule(schedule, scheduleDTO.getEmployeeIds(), scheduleDTO.getPetIds());
+            schedule.getId(); // will throw the exception in case of a null value returned, because employee(s) or pet(s) do not exist
+            convertedSchedule = convertScheduleToScheduleDTO(schedule);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule could not be saved", exception);
         }

@@ -37,7 +37,7 @@ public class EmployeeService {
         if (employee.isPresent())
             return employee.get();
         else
-            return null; // ToDo: throw exception here?
+            return null; // this will trigger an exception thrown by the controller
     }
 
     public void setEmployeeAvailability(Set<DayOfWeek> days, Long employeeId) {

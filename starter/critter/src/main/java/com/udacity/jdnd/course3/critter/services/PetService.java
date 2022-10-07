@@ -49,7 +49,7 @@ public class PetService {
         if(customer.isPresent())
             return customer.get().getPets();
         else
-            return null; // ToDo: throw exception here?
+            return null; // this will trigger an exception thrown by the controller
 
     }
 

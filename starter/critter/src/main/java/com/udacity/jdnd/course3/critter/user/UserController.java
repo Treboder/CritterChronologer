@@ -99,6 +99,7 @@ public class UserController {
         Employee employee;
         try {
             employee = employeeService.getEmployeeById(employeeId);
+            employee.getId(); // this will trigger the exception in case of a null value returned from service
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "employee with id: " + employeeId + " not found", exception);
         }

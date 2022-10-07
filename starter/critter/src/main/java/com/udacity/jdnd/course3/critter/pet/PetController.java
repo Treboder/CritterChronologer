@@ -46,6 +46,7 @@ public class PetController {
         Pet pet;
         try {
             pet = petService.getPetById(petId);
+            pet.getId(); // this will trigger the exception in case of a null value returned from service
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet with id: " + petId + " not found", exception);
         }
