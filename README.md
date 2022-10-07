@@ -123,6 +123,8 @@ responds with a list of pets owned by customer with id=1 (parameterized as PathV
   where pathvariable represents the id (in this case for the employee with id=3)
 
 ## ToDo
+* IntellJ says: Deprecated configuration property 'spring.datasource.initialization-mode'
+* 
 
 ## Dependencies
 
