@@ -56,6 +56,7 @@ public class UserController {
         Customer customer;
         try {
             customer = customerService.getCustomerById(id);
+            customer.getId(); // this will trigger the exception in case of a null value returned from service
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "owner with id: " + id + " not found", exception);
         }
@@ -67,6 +68,7 @@ public class UserController {
         Customer customer;
         try {
             customer = customerService.getCustomerByPetId(petId);
+            customer.getId(); // this will trigger the exception in case of a null value returned from service
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", exception);
         }

@@ -45,7 +45,7 @@ public class CustomerService {
         if (customer.isPresent())
             return customer.get();
         else
-            return null; // ToDo: throw exception here?
+            return null; // triggers an exception thrown from controller
     }
 
     public Customer getCustomerByPetId(Long petId) { // returns the owner of pet with petId given
@@ -53,7 +53,7 @@ public class CustomerService {
         if(pet.isPresent())
             return pet.get().getOwner();
         else
-            return null; // ToDo: throw exception here?
+            return null; // triggers an exception thrown from controller
     }
 
 
